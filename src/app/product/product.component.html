@@ -1,0 +1,92 @@
+
+<div class="flex p-5 lg:ml-40">  
+    <div class="flex items-center font-thin cursor-pointer">
+      Thực đơn /
+      <div *ngIf="isLoading" class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[30px]"></div>
+      <div routerLink="/menu/{{product.category}}" *ngIf="!isLoading" class="line-clamp-1 mx-2">{{product.category_name}}</div>/
+      <div *ngIf="isLoading" class="inline-block ml-2 animate-pulse bg-gray-200 w-[100px] h-[30px]"></div>
+      <div *ngIf="!isLoading" class="font-bold ml-2 line-clamp-1">{{product.slug}}</div>
+    </div>
+</div>
+<div class="max-w-6xl px-[5%] mx-auto">
+    <!-- Main Product Section -->
+    <div class="bg-white rounded-lg flex flex-col md:flex-row sm:grid-cols-2 lg:grid-cols-3 ">
+      <div class="md:w-1/2">
+        <div class="relative overflow-hidden rounded-md w-full h-[300px] md:h-[500px]">
+          <!-- animation load before image fetch -->
+          <div *ngIf="isLoading" class="animate-pulse bg-gray-200 w-full  h-[300px] md:h-[500px]"></div>
+
+          <!-- image after fetch success -->
+          <img *ngIf="!isLoading" [src]="bigImage" alt="Trà Sen Vàng" class="w-full h-full object-cover hover:scale-[1.03] transition-transform duration-250 ease-out cursor-pointer">
+
+        </div>
+        <div class="flex space-x-2 mt-2">   
+          <div *ngIf="isLoading" class="animate-pulse bg-gray-200 w-[60px] h-[60px] rounded-md"></div>
+          <div *ngIf="!isLoading" class="relative overflow-hidden">
+            <img *ngIf="product.images== null" src="{{product.image}}" alt="Thumbnail 2" class="w-16 h-16 object-cover rounded-md border-gray-300 p-1 border-2 cursor-pointer">
+          </div>
+          <div class="flex items-center gap-2" *ngIf="product.images">
+            <div *ngFor="let i of product.images" class="relative overflow-hidden" (click)="viewImage(i)">
+              <img src="{{i}}" alt="Thumbnail 1" class="w-16 h-16 object-cover rounded-md border-transparent p-1 border-2 cursor-pointer ">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="md:w-1/2 md:pl-6 py-3">
+        <div *ngIf="isLoading" class="animate-pulse bg-gray-200 w-full h-[40px]"></div>
+        <h1 *ngIf="!isLoading" class="text-3xl font-bold">{{product.name}}</h1>
+        <div class="relative mt-4">
+          <div *ngIf="isLoading" class="animate-pulse bg-gray-200 w-[150px] h-[40px]"></div>
+          <span *ngIf="!isLoading" class="font-medium text-3xl">{{product.price | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+        </div>
+        <div *ngIf="!isLoading">
+          <div *ngIf="product.listPrice" class="relative mt-6">
+            <label class="absolute -top-[18px] left-[2px]">Size M</label>
+            <span class="font-semibold text-3xl text-[#00754A]">{{product.listPrice[1] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+          </div>
+          <div *ngIf="!product.price" class="flex gap-4 items-center">
+            <div class="relative mt-4">
+              <label class="absolute text-sm -top-[16px] left-[2px]">Size S</label>
+              <span class="font-medium text-xl">{{product.listPrice[0] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+            </div>
+            <div class="relative mt-4">
+              <label class="absolute text-sm -top-[16px] left-[2px]">Size L</label>
+              <span class="font-medium text-xl">{{product.listPrice[2] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isLoading" class="animate-pulse py-3 flex gap-2 flex-col w-full">
+          <div class="h-[18px] bg-gray-200"></div>
+          <div class="h-[18px] bg-gray-200"></div>
+          <div class="h-[18px] w-[70%] bg-gray-200"></div>
+        </div>
+        <p *ngIf="!isLoading" class="text-gray-700 mt-4 text-justify">Thức uống chinh phục những thực khách khó tính. Sự kết hợp độc đáo giữa trà ô long, hạt sen bởm, và các lát năng giòn tan. Thêm vào đó là sữa đặc và vị kem ngọt ngào.</p>
+      </div>
+    </div>
+    <!-- <div class="mt-12">
+      <h2 class="text-xl text-center font-bold mb-4">Sản phẩm liên quan</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white p-4 rounded-lg shadow-md hover:scale-110 transition-transform duration-250 ease-out cursor-pointer hover:text-red-400">
+          <img src="" alt="Hazelnut Macchiato" class="w-full h-40 object-cover rounded-md mb-4">
+          <h3 class="text-md font-semibold">Hazelnut Macchiato</h3>
+          <p class="text-green-600 font-bold">66.000 đ</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md hover:scale-110 transition-transform duration-250 ease-out cursor-pointer hover:text-red-400">
+          <img src="" alt="Hot Chocolate Classic" class="w-full h-40 object-cover rounded-md mb-4">
+          <h3 class="text-md font-semibold">Hot Chocolate Classic</h3>
+          <p class="text-green-600 font-bold">85.000 đ</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md hover:scale-110 transition-transform duration-250 ease-out cursor-pointer hover:text-red-400">
+          <img src="" alt="Iced Caffè Americano" class="w-full h-40 object-cover rounded-md mb-4">
+          <h3 class="text-md font-semibold">Iced Caffè Americano</h3>
+          <p class="text-green-600 font-bold">60.000 đ</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-md hover:scale-110 transition-transform duration-250 ease-out cursor-pointer hover:text-red-400">
+          <img src="" alt="Espresso Con Panna" class="w-full h-40 object-cover rounded-md mb-4">
+          <h3 class="text-md font-semibold">Espresso Con Panna</h3>
+          <p class="text-green-600 font-bold">77.000 đ</p>
+        </div>
+      </div>  
+    </div> -->
+  </div>
+

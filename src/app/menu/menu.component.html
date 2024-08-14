@@ -1,0 +1,169 @@
+<script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
+
+<div class="bg-white">
+  <div class="container grid grid-cols-1 md:grid-cols-[20%,1fr] mx-auto px-4">
+    <div class="">
+      <div class="w-full mb-4 md:mb-0">
+        <ul *ngIf="!isLoading" class="flex flex-col sm:flex-row md:flex-col gap-4 sm:gap-6 items-start sm:items-center md:items-start text-left mt-[30px] md:mt-[60px]">
+          <li routerLink="/menu" ><a class="inline-block text-lg font-bold">Tất cả</a></li>
+          <li class="mt-0" *ngFor="let c of listCategories" routerLink="/menu/{{c.slug}}"><a class="inline-block font-bold text-lg">{{c.name}}</a></li>
+        </ul>
+        <ul *ngIf="isLoading" class="flex flex-col sm:flex-row md:flex-col gap-4 sm:gap-6 items-start sm:items-center md:items-start text-left mt-[30px] md:mt-[60px]">
+          <li><a routerLink="/menu" class="inline-block text-lg font-bold">Tất cả</a></li>
+          <li><div class="inline-block animate-pulse bg-gray-200 w-[80px] h-[26px]"></div> </li>
+          <li><div class="inline-block animate-pulse bg-gray-200 w-[60px] h-[26px]"></div> </li>
+          <li><div class="inline-block animate-pulse bg-gray-200 w-[120px] h-[26px]"></div> </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="w-full mt-[20px] md:mt-[50px] mb-[40px] p-2">
+      <h2 class="text-2xl font-bold mb-4">Đồ uống</h2>
+      <div *ngIf="isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+      </div>
+      <div *ngIf="!isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+        <div class="text-center" *ngFor="let p of listDrink" routerLink="/product/{{p._id}}">
+          <img src="{{p.image}}" alt="{{p.name}}" class="w-full h-[250px] object-cover mb-2 rounded-md">
+          <h3 class="text-lg font-medium line-clamp-1">{{p.name}}</h3>
+          <p class="text-lg">{{p.price | currency:'VND':'đ':'1.0-0':'vi'}}</p>
+          <div class="flex items-center gap-2 justify-center" *ngIf="p.listPrice">
+            <span>{{p.listPrice[0] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+            ~
+            <span>{{p.listPrice[2] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="text-2xl font-bold mb-4">Đồ ăn</h2>
+      <div *ngIf="isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+      </div>
+      <div *ngIf="!isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+        <div class="text-center" *ngFor="let p of listFood" routerLink="/product/{{p._id}}">
+          <img src="{{p.image}}" alt="{{p.name}}" class="w-full h-[250px] object-cover mb-2 rounded-md">
+          <h3 class="text-lg font-medium line-clamp-1">{{p.name}}</h3>
+          <p class="text-lg">{{p.price | currency:'VND':'đ':'1.0-0':'vi'}}</p>
+          <div class="flex items-center gap-2 justify-center" *ngIf="p.listPrice">
+            <span>{{p.listPrice[0] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+            ~
+            <span>{{p.listPrice[2] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+          </div>
+        </div>
+      </div>
+      <h2 class="text-2xl font-bold mb-4">Mặt hàng khác</h2>
+      <div *ngIf="isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+            <div class="text-center">
+                <div class="w-full h-[250px] bg-gray-200 object-cover mb-2 rounded-md"></div>
+                <div class="inline-block mx-2 animate-pulse bg-gray-200 w-[100px] h-[26px]"></div>
+            </div>
+      </div>
+      <div *ngIf="!isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 mb-12">
+        <div class="text-center" *ngFor="let p of listGoods" routerLink="/product/{{p._id}}">
+          <img src="{{p.image}}" alt="{{p.name}}" class="w-full h-[250px] object-cover mb-2 rounded-md">
+          <h3 class="text-lg font-medium line-clamp-1">{{p.name}}</h3>
+          <p class="text-lg">{{p.price | currency:'VND':'đ':'1.0-0':'vi'}}</p>
+          <div class="flex items-center gap-2 justify-center" *ngIf="p.listPrice">
+            <span>{{p.listPrice[0] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+            ~
+            <span>{{p.listPrice[2] | currency:'VND':'đ':'1.0-0':'vi'}}</span>
+          </div>
+        </div>
+      </div>
+      
+      
+    </div>
+
+  </div>
+
+</div>

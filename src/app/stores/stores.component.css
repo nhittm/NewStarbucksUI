@@ -1,0 +1,8 @@
+#scrollstores::-webkit-scrollbar{
+    width: 5px;
+}
+
+#scrollstores::-webkit-scrollbar-thumb{
+    background-color: #009c63;
+    border-radius: 10px;
+}
